@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,8 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,19 +22,19 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @ManyToOne
     private Car car;
     @Column(name = "problem_description")
     private String problemDescription;
     @Column(name = "acceptance_date")
     private LocalDateTime acceptanceDate;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<Favor> favors = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order")
+    private List<Favor> favors;
+    @OneToMany()
     @JoinColumn(name = "order_id")
-    private List<Goods> goods = new ArrayList<>();
+    private List<Goods> goods;
     @Enumerated(EnumType.STRING)
-    private Status status = Status.ACCEPTED;
+    private Status status;
     @Column(name = "final_price")
     private BigDecimal finalPrice;
     @Column(name = "end_date")
@@ -50,6 +49,9 @@ public class Order {
     }
 
     public Order() {
+        favors = new ArrayList<>();
+        goods = new ArrayList<>();
+        status = Status.ACCEPTED;
     }
 
     public Long getId() {

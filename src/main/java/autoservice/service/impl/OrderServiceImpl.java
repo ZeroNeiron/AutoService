@@ -5,6 +5,7 @@ import autoservice.model.Goods;
 import autoservice.model.Order;
 import autoservice.repository.OrderRepository;
 import autoservice.service.FavorService;
+import autoservice.service.GoodsService;
 import autoservice.service.OrderService;
 import autoservice.service.PriceService;
 import java.math.BigDecimal;
@@ -15,13 +16,15 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final FavorService favorService;
+    private final GoodsService goodsService;
     private final PriceService priceService;
 
     public OrderServiceImpl(OrderRepository orderRepository,
                             FavorService favorService,
-                            PriceService priceService) {
+                            GoodsService goodsService, PriceService priceService) {
         this.orderRepository = orderRepository;
         this.favorService = favorService;
+        this.goodsService = goodsService;
         this.priceService = priceService;
     }
 
@@ -49,14 +52,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order addGoods(Long id, Goods goods) {
         Order order = getById(id);
-        order.getGoods().add(goods);
+        order.getGoods().add(goodsService.create(goods));
         return create(order);
     }
 
     @Override
     public Order addFavor(Long id, Favor favor) {
         Order order = getById(id);
-        order.getFavors().add(favor);
+        order.getFavors().add(favorService.create(favor));
         return create(order);
     }
 

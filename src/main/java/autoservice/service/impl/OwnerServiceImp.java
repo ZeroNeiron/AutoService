@@ -4,6 +4,7 @@ import autoservice.model.Car;
 import autoservice.model.Order;
 import autoservice.model.Owner;
 import autoservice.repository.OwnerRepository;
+import autoservice.service.OrderService;
 import autoservice.service.OwnerService;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,12 @@ import org.springframework.stereotype.Service;
 public class OwnerServiceImp implements OwnerService {
     private final OwnerRepository ownerRepository;
 
-    public OwnerServiceImp(OwnerRepository ownerRepository) {
+    private final OrderService orderService;
+
+    public OwnerServiceImp(OwnerRepository ownerRepository,
+                           OrderService orderService) {
         this.ownerRepository = ownerRepository;
+        this.orderService = orderService;
     }
 
     @Override

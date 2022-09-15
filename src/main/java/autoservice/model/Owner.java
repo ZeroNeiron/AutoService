@@ -2,7 +2,7 @@ package autoservice.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,15 +17,19 @@ public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     @OneToMany(mappedBy = "owner")
-    private List<Car> cars = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    private List<Car> cars;
+    @OneToMany
     @JoinColumn(name = "owner_id")
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders;
 
     public Owner() {
+        orders = new ArrayList<>();
+        cars = new ArrayList<>();
     }
 
     public Long getId() {
