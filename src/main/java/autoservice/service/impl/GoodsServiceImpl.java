@@ -17,7 +17,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Goods getById(Long id) {
         return goodsRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Can't get car by id " + id));
+                new RuntimeException("Can't get goods by id " + id));
     }
 
     @Override
