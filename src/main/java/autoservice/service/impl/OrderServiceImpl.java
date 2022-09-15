@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getById(Long id) {
         return orderRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Can't get car by id " + id));
+                new RuntimeException("Can't get order by id " + id));
     }
 
     @Override

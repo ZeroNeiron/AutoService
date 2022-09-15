@@ -24,7 +24,7 @@ public class OwnerServiceImp implements OwnerService {
     @Override
     public Owner getById(Long id) {
         return ownerRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Can't get car by id " + id));
+                new RuntimeException("Can't get owner by id " + id));
     }
 
     @Override
