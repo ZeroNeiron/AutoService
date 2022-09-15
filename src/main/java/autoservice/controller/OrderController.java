@@ -8,7 +8,6 @@ import autoservice.model.Order;
 import autoservice.model.Owner;
 import autoservice.service.OrderService;
 import autoservice.service.OwnerService;
-import autoservice.service.PriceService;
 import autoservice.service.StatusService;
 import autoservice.service.mapper.FavorMapper;
 import autoservice.service.mapper.GoodsMapper;
@@ -37,22 +36,18 @@ public class OrderController {
 
     private final StatusService statusService;
 
-    private final PriceService priceService;
-
     public OrderController(OrderMapper orderMapper,
                            OrderService orderService,
                            GoodsMapper goodsMapper,
                            OwnerService ownerService,
                            FavorMapper favorMapper,
-                           StatusService statusService,
-                           PriceService priceService) {
+                           StatusService statusService) {
         this.orderMapper = orderMapper;
         this.orderService = orderService;
         this.goodsMapper = goodsMapper;
         this.ownerService = ownerService;
         this.favorMapper = favorMapper;
         this.statusService = statusService;
-        this.priceService = priceService;
     }
 
     @PostMapping
@@ -93,7 +88,7 @@ public class OrderController {
         return orderMapper.mapToDto(orderService.create(order));
     }
 
-    @PutMapping({"/{id}/status", "/{id}/status"})
+    @PutMapping("/{id}/status")
     public OrderResponseDto updateOrderStatus(@PathVariable Long id,
                                               @RequestParam String newStatus) {
         return orderMapper
@@ -101,7 +96,7 @@ public class OrderController {
                         .changeOrderStatus(id, Order.Status.valueOf(newStatus)));
     }
 
-    @GetMapping({"/{id}/price", "/{id}/price"})
+    @GetMapping("/{id}/price")
     public BigDecimal getOrderPrice(@PathVariable Long id, @RequestParam Integer bonus) {
         return orderService.setFinalPrice(id, bonus);
     }

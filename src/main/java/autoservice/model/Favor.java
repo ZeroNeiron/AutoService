@@ -1,6 +1,7 @@
 package autoservice.model;
 
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,12 +19,13 @@ public class Favor {
     private Long id;
     @ManyToOne
     private Order order;
-    @OneToOne
+    @ManyToOne
     private Repairman repairman;
+    @Column(name = "favor_name")
     private String favorName;
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
-    private Status status = Status.NOT_PAID;
+    private Status status;
 
     public enum Status {
         PAID,
@@ -32,6 +33,7 @@ public class Favor {
     }
 
     public Favor() {
+        status = Status.NOT_PAID;
     }
 
     public Long getId() {
