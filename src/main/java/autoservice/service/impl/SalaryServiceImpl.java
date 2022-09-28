@@ -25,8 +25,6 @@ public class SalaryServiceImpl implements SalaryService {
         List<Favor> favors = favorService.getFavorsByRepairmanIdAndOrderId(repairmanId, orderId);
         favors.forEach(f -> statusService.changeFavorStatus(f.getId(),Favor.Status.PAID));
         return favors.stream()
-                .filter(f -> f.getRepairman()
-                        .getId().equals(repairmanId))
                 .map(f -> f.getPrice()
                         .multiply(REPAIRMAN_DISCOUNT))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

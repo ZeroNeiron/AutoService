@@ -3,6 +3,7 @@ package autoservice.service.impl;
 import autoservice.model.Favor;
 import autoservice.model.Order;
 import autoservice.model.Repairman;
+import autoservice.repository.FavorRepository;
 import autoservice.service.FavorService;
 import autoservice.service.OrderService;
 import autoservice.service.RepairmanService;
@@ -14,13 +15,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class StatusServiceImpl implements StatusService {
+    private final FavorRepository favorRepository;
     private final FavorService favorService;
     private final OrderService orderService;
     private final RepairmanService repairmanService;
 
-    public StatusServiceImpl(FavorService favorService,
+    public StatusServiceImpl(FavorRepository favorRepository,
+                             FavorService favorService,
                              OrderService orderService,
                              RepairmanService repairmanService) {
+        this.favorRepository = favorRepository;
         this.favorService = favorService;
         this.orderService = orderService;
         this.repairmanService = repairmanService;
@@ -28,7 +32,8 @@ public class StatusServiceImpl implements StatusService {
 
     @Override
     public Favor changeFavorStatus(Long id, Favor.Status status) {
-        return favorService.create(favorService.getById(id).setStatus(status));
+        favorRepository.changeFavorStatusById(id, status);
+        return favorService.getById(id);
     }
 
     @Override
