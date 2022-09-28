@@ -5,5 +5,5 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FavorRepository extends JpaRepository<Favor, Long> {
-    List<Favor> getFavorsByRepairman_IdAndOrder_Id(Long repairmanId, Long orderId);
+    List<Favor> getFavorsByRepairmanIdAndOrderId(Long repairmanId, Long orderId);
 }

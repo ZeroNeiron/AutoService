@@ -28,7 +28,6 @@ public class RepairmanController {
     private final RepairmanService repairmanService;
     private final RepairmanMapper repairmanMapper;
     private final OrderMapper orderMapper;
-
     private final SalaryService salaryService;
 
     public RepairmanController(RepairmanService repairmanService,

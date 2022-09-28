@@ -9,5 +9,4 @@ public class RepairmanResponseDto {
     private String firstName;
     private String lastName;
     private List<OrderResponseDto> completedOrders;
-
 }

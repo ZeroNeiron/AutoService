@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StatusServiceImpl implements StatusService {
     private final FavorService favorService;
-
     private final OrderService orderService;
-
     private final RepairmanService repairmanService;
 
     public StatusServiceImpl(FavorService favorService,
@@ -55,7 +53,9 @@ public class StatusServiceImpl implements StatusService {
     }
 
     private List<Repairman> changeToFailure(Order order) {
-        Favor priceFavor = order.getFavors().get(0);
+        Favor priceFavor = order.getFavors().stream()
+                .findFirst()
+                .get();
         priceFavor.setPrice(BigDecimal.valueOf(500));
         return List.of(priceFavor.getRepairman());
     }

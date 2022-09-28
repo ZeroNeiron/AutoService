@@ -27,13 +27,16 @@ public class Favor {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    public Favor() {
+    }
+
     public enum Status {
         PAID,
         NOT_PAID
     }
 
-    public Favor() {
-        status = Status.NOT_PAID;
+    public Favor(Status status) {
+        this.status = status;
     }
 
     public Long getId() {

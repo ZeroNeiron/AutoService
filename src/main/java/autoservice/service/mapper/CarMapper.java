@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CarMapper {
-
     private final OwnerService ownerService;
 
     public CarMapper(OwnerService ownerService) {
