@@ -33,7 +33,6 @@ public class OrderController {
     private final GoodsMapper goodsMapper;
     private final OwnerService ownerService;
     private final FavorMapper favorMapper;
-
     private final StatusService statusService;
 
     public OrderController(OrderMapper orderMapper,

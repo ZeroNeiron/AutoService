@@ -45,6 +45,9 @@ public class Order {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
+    public Order() {
+    }
+
     public enum Status {
         IN_PROCESS,
         ACCEPTED,
@@ -53,10 +56,10 @@ public class Order {
         PAID
     }
 
-    public Order() {
+    public Order(Status status) {
         favors = new ArrayList<>();
         goods = new ArrayList<>();
-        status = Status.ACCEPTED;
+        this.status = status;
     }
 
     public Long getId() {

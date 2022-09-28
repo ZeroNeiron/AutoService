@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class SalaryServiceImpl implements SalaryService {
     private static final BigDecimal REPAIRMAN_DISCOUNT = BigDecimal.valueOf(0.4);
     private final FavorService favorService;
-
     private final StatusService statusService;
 
     public SalaryServiceImpl(FavorService favorService,
@@ -26,8 +25,6 @@ public class SalaryServiceImpl implements SalaryService {
         List<Favor> favors = favorService.getFavorsByRepairmanIdAndOrderId(repairmanId, orderId);
         favors.forEach(f -> statusService.changeFavorStatus(f.getId(),Favor.Status.PAID));
         return favors.stream()
-                .filter(f -> f.getRepairman()
-                        .getId().equals(repairmanId))
                 .map(f -> f.getPrice()
                         .multiply(REPAIRMAN_DISCOUNT))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

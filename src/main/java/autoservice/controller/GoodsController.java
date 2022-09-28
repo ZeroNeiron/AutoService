@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
-
     private final GoodsService goodsService;
     private final GoodsMapper goodsMapper;
 

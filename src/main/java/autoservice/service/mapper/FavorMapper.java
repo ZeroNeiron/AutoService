@@ -18,7 +18,7 @@ public class FavorMapper {
     }
 
     public Favor mapToModel(FavorRequestDto favorRequestDto) {
-        Favor favor = new Favor();
+        Favor favor = new Favor(Favor.Status.NOT_PAID);
         favor.setFavorName(favorRequestDto.getFavorName());
         favor.setOrder(orderService.getById(favorRequestDto.getOrderId()));
         favor.setRepairman(repairmanService.getById(favorRequestDto.getRepairmanId()));

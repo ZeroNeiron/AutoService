@@ -53,14 +53,14 @@ public class OrderServiceImpl implements OrderService {
     public Order addGoods(Long id, Goods goods) {
         Order order = getById(id);
         order.getGoods().add(goodsService.create(goods));
-        return create(order);
+        return order;
     }
 
     @Override
     public Order addFavor(Long id, Favor favor) {
         Order order = getById(id);
         order.getFavors().add(favorService.create(favor));
-        return create(order);
+        return order;
     }
 
     @Override

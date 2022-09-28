@@ -4,21 +4,16 @@ import autoservice.model.Car;
 import autoservice.model.Order;
 import autoservice.model.Owner;
 import autoservice.repository.OwnerRepository;
-import autoservice.service.OrderService;
 import autoservice.service.OwnerService;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OwnerServiceImp implements OwnerService {
+public class OwnerServiceImpl implements OwnerService {
     private final OwnerRepository ownerRepository;
 
-    private final OrderService orderService;
-
-    public OwnerServiceImp(OwnerRepository ownerRepository,
-                           OrderService orderService) {
+    public OwnerServiceImpl(OwnerRepository ownerRepository) {
         this.ownerRepository = ownerRepository;
-        this.orderService = orderService;
     }
 
     @Override
@@ -46,14 +41,14 @@ public class OwnerServiceImp implements OwnerService {
     public Owner addCar(Long id, Car car) {
         Owner owner = getById(id);
         owner.getCars().add(car);
-        return create(owner);
+        return owner;
     }
 
     @Override
     public Owner addOrder(Long id, Order order) {
         Owner owner = getById(id);
         owner.getOrders().add(order);
-        return create(owner);
+        return owner;
     }
 
     @Override

@@ -4,29 +4,25 @@ import autoservice.dto.request.OrderRequestDto;
 import autoservice.dto.response.OrderResponseDto;
 import autoservice.model.Order;
 import autoservice.service.CarService;
-import autoservice.service.GoodsService;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper {
     private final CarService carService;
-    private final GoodsService goodsService;
     private final GoodsMapper goodsMapper;
     private final FavorMapper favorMapper;
 
     public OrderMapper(CarService carService,
-                       GoodsService goodsService,
                        GoodsMapper goodsMapper,
                        FavorMapper favorMapper) {
         this.carService = carService;
-        this.goodsService = goodsService;
         this.goodsMapper = goodsMapper;
         this.favorMapper = favorMapper;
     }
 
     public Order mapToModel(OrderRequestDto orderRequestDto) {
-        Order order = new Order();
+        Order order = new Order(Order.Status.ACCEPTED);
         order.setCar(carService.getById(orderRequestDto.getCarId()));
         order.setAcceptanceDate(orderRequestDto.getAcceptanceDate());
         order.setProblemDescription(orderRequestDto.getProblemDescription());

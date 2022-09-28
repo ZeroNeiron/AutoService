@@ -28,7 +28,6 @@ public class RepairmanController {
     private final RepairmanService repairmanService;
     private final RepairmanMapper repairmanMapper;
     private final OrderMapper orderMapper;
-
     private final SalaryService salaryService;
 
     public RepairmanController(RepairmanService repairmanService,
@@ -61,7 +60,7 @@ public class RepairmanController {
 
     @GetMapping("/{id}/orders")
     public List<OrderResponseDto> getByCompletedOrdersById(@PathVariable Long id) {
-        return repairmanService.getById(id).getCompletedOrders().stream()
+        return repairmanService.getAllCompletedOrdersById(id).stream()
                 .distinct()
                 .map(orderMapper::mapToDto)
                 .collect(Collectors.toList());

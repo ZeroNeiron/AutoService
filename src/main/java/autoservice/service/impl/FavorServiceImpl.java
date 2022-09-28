@@ -37,6 +37,6 @@ public class FavorServiceImpl implements FavorService {
 
     @Override
     public List<Favor> getFavorsByRepairmanIdAndOrderId(Long repairmanId, Long orderId) {
-        return favorRepository.getFavorsByRepairman_IdAndOrder_Id(repairmanId, orderId);
+        return favorRepository.getFavorsByRepairmanIdAndOrderId(repairmanId, orderId);
     }
 }
